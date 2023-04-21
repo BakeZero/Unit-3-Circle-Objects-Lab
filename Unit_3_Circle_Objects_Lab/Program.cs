@@ -6,30 +6,30 @@ class Program
     static void Main()
     {
         Console.WriteLine("Welcome to the Circle Tester!");
-        List<Circle> circleList = new List<Circle>();
+        double rad = 0;
+        Validator.GetNumber(ref rad);
+        Circle circle = new Circle(rad);
 
         do
         {
-            double rad = 0;
-            Validator.GetNumber(ref rad); // Receive user input
-
-            /* Make a circle object and output calculations */
-            Circle newCircle = new Circle(rad);
-            Console.WriteLine($"Circumference:\t{newCircle.CalculateFormattedCircumference()}");
-            Console.WriteLine($"Area:\t\t{newCircle.CalculateFormattedArea()}");
-            circleList.Add(newCircle);
+            Console.WriteLine($"Diameter:\t{circle.CalculateDiameter()}");
+            Console.WriteLine($"Circumference:\t{circle.CalculateFormattedCircumference()}");
+            Console.WriteLine($"Area:\t\t{circle.CalculateFormattedArea()}");
+            circle.Grow();
         } while (Continue());
 
-        Console.WriteLine($"Goodbye. You created {circleList.Count} Circle object(s).");
+        Console.WriteLine($"Goodbye. The circle's final radius is {circle.GetRadius()}.");
     }
-    
-    /* Method to continue loop while the user inputs "y" */
+
     static bool Continue()
     {
-        Console.Write("Continue? (y/n): ");
+        Console.Write("\nShould the circle grow? (y/n): ");
         string prompt = Console.ReadLine();
         if (prompt.ToLower() == "y")
+        {
+            Console.WriteLine("The circle is magically growing.\n");
             return true;
+        }
         else if (prompt.ToLower() == "n")
             return false;
         else
@@ -42,6 +42,11 @@ public class Circle
     private double radius;
 
     public Circle(double radius) { this.radius = radius; }
+
+    public double CalculateDiameter()
+    {
+        return radius * 2;
+    }
 
     public double CalculateCircumference()
     {
@@ -68,8 +73,13 @@ public class Circle
         return string.Format("{0:0.##}", x);
     }
 
+    public void Grow()
+    {
+        SetRadius(radius * 2);
+    }
+
     public double GetRadius() { return radius; }
-    public void SetRadius(double radius) { this.radius = radius; }
+    private void SetRadius(double radius) { this.radius = radius; }
 
 }
 
