@@ -47,6 +47,16 @@ namespace Unit_3_Circle_Objects_Lab
             SetRadius(radius * 2);
         }
 
+        public override string ToString()
+        {
+            string output = "";
+            output += "Radius:\t\t" + radius + "\n";
+            output += "Diameter:\t" + CalculateDiameter() + "\n";
+            output += "Circumference:\t" + CalculateFormattedCircumference() + "\n";
+            output += "Area:\t\t" + CalculateFormattedArea();
+            return output;
+        }
+
         public double GetRadius() { return radius; }
         private void SetRadius(double radius) { this.radius = radius; }
     }

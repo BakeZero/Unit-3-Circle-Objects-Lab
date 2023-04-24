@@ -14,28 +14,26 @@ namespace Unit_3_Circle_Objects_Lab
 
             do
             {
-                Console.WriteLine($"Diameter:\t{circle.CalculateDiameter()}");
-                Console.WriteLine($"Circumference:\t{circle.CalculateFormattedCircumference()}");
-                Console.WriteLine($"Area:\t\t{circle.CalculateFormattedArea()}");
-                circle.Grow();
-            } while (Continue());
+                Console.WriteLine(circle.ToString());
+            } while (Continue(ref circle));
 
             Console.WriteLine($"Goodbye. The circle's final radius is {circle.GetRadius()}.");
         }
 
-        static bool Continue()
+        static bool Continue(ref Circle circle)
         {
             Console.Write("\nShould the circle grow? (y/n): ");
             string prompt = Console.ReadLine();
             if (prompt.ToLower() == "y")
             {
                 Console.WriteLine("The circle is magically growing.\n");
+                circle.Grow();
                 return true;
             }
             else if (prompt.ToLower() == "n")
                 return false;
             else
-                return Continue();
+                return Continue(ref circle);
         }
     }
 }
